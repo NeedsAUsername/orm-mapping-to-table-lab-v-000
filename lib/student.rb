@@ -38,7 +38,7 @@ class Student
             VALUES (?, ?)
         SQL
         student = DB[:conn].execute(sql, name, grade)
-        # Student.new(student.name, student.grade)
+        Student.new(student[0][0], student[0][1])
     end
 
 
