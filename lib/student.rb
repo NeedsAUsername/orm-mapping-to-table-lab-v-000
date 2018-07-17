@@ -37,7 +37,8 @@ class Student
             INSERT INTO students (name, grade)
             VALUES (?, ?)
         SQL
-        student = DB[:conn].execute(sql, name, grade)
+        DB[:conn].execute(sql, name, grade)
+        student = DB[:conn].execute("SELECT * FROM students WHERE student.id = (SELECT last_insert_rowid() FROM students)")
         Student.new(student[0][0], student[0][1])
     end
 
