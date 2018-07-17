@@ -33,13 +33,9 @@ class Student
     end
 
     def self.create(name:, grade:)
-        sql = <<-SQL
-            INSERT INTO students (name, grade)
-            VALUES (?, ?)
-        SQL
-        DB[:conn].execute(sql, name, grade)
-        student = DB[:conn].execute("SELECT * FROM students WHERE student.id = (SELECT last_insert_rowid() FROM students)")
-        Student.new(student[0][0], student[0][1])
+        student = Student.new(name, grade)
+        student.save
+        student 
     end
 
 
